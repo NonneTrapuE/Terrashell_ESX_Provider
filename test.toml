@@ -1,0 +1,35 @@
+[[terraform.required_providers]]
+provider = "https://github.com/NonneTrapuE/Terrashell_ESX_Provider/archive/refs/heads/main.zip"
+
+[[provider.esxi]]
+esxi_hostname = ""
+esxi_hostport = "22"
+esxi_hostssl = "443"
+esxi_username = ""
+esxi_password = ""
+
+[[resource.esxi_guest]]
+guest_name = "ERP"
+disk_store = "Data"
+memsize = "2048"
+numvcpus = "2"
+guestos = "debian11-64"
+power = "on"
+ovf_source = "C:\\path\\of\\your\\ovf\\file"
+network_interfaces = [
+    {virtual_network = "VM Network"}
+    ]
+connection = [
+    {type = "ssh", user = "template", host = "10.10.2.50", private_key = "/tmp/"}
+    ]
+provisioner = [
+    {remote-exec = [
+        {inline = [
+            "sudo apt update -y && sudo apt upgrade -y",
+             "sudo rm -f /etc/NetworkManager/system-connections/ens33.nmconnection",
+              "sudo mv /etc/NetworkManager/system-connections/ens33.nmconnection.dhcp /etc/NetworkManager/system-connections/ens33.nmconnection",
+               "sudo passwd -l template ", "sudo hostnamectl set-hostname SRV-HAPRDERP"
+               ]}
+            ]}
+        ]
+
