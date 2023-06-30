@@ -35,7 +35,7 @@ $convertToml = get-content $TOMLcopy | ConvertFrom-Toml
 #import du module PowerCli
 
 try {
-  Install-Module -Name "VMWare.PowerCLI" -Force
+  Import-Module -Name "VMWare.VimAutomation.Core" -Force 
   
 }
 catch {
@@ -54,7 +54,7 @@ Set-PowerCLIConfiguration -ParticipateInCeip:$false -InvalidCertificateAction Ig
 
 $ESXHost = $convertToml.provider.esxi.esxi_hostname
 $ESXRoot = $convertToml.provider.esxi.esxi_username
-$ESXPasswd = $convertToml.provider.esxi.password | ConvertTo-SecureString -AsPlainText 
+$ESXPasswd = $convertToml.provider.esxi.esxi_password | ConvertTo-SecureString -AsPlainText 
 $ESXcred = New-Object System.Management.Automation.PSCredential ($ESXRoot, $ESXPasswd)
 
 #Paramètres de la VM
@@ -79,7 +79,7 @@ $VMGuestOS = $convertToml.resource.esxi_guest.guestos
 #   - Format ova non prit en charge
 #   - Barre de progression dans ESX : affichage de la progression variable (peut rester figée à 0%)
 
-Connect-VIServer -Server $ESXHost -Credential $ESXcred
+Connect-VIServer -Server $ESXHost -Credential $ESXcred 
 Import-VApp -Name $VMName -Source $VMSource -VMHost (Get-VMHost -Name $ESXHost) -Datastore $VMDatastore -DiskStorageFormat Thin
 Get-VM -Name $VMName | Set-VM -CoresPerSocket $VMCPU -GuestId $VMGuestOS -MemoryMB $VMMemory 
 Get-VM -Name $VMName | Get-NetworkAdapter | Set-NetworkAdapter -NetworkName $VMNetwork -StartConnected:$true -Confirm:$false
