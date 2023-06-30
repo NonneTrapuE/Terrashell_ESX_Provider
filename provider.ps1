@@ -81,6 +81,6 @@ $VMGuestOS = $convertToml.resource.esxi_guest.guestos
 
 Connect-VIServer -Server $ESXHost -Credential $ESXcred 
 Import-VApp -Name $VMName -Source $VMSource -VMHost (Get-VMHost -Name $ESXHost) -Datastore $VMDatastore -DiskStorageFormat Thin
-Get-VM -Name $VMName | Set-VM -CoresPerSocket $VMCPU -GuestId $VMGuestOS -MemoryMB $VMMemory 
+Set-VM -VM (Get-VM -Name $VMName) -CoresPerSocket $VMCPU -GuestId $VMGuestOS -MemoryMB $VMMemory -Confirm:$false
 Get-VM -Name $VMName | Get-NetworkAdapter | Set-NetworkAdapter -NetworkName $VMNetwork -StartConnected:$true -Confirm:$false
 Disconnect-VIServer -Server $ESXHost -Force
