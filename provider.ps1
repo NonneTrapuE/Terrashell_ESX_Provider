@@ -17,7 +17,7 @@ Param(
 
 # Import du module PSToml
 try {
-  Import-Module -Name PSToml -Force -con  
+  Import-Module -Name PSToml -Force   
 
 }
 catch {
