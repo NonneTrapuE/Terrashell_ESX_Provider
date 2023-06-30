@@ -17,7 +17,7 @@ Param(
 
 # Import du module PSToml
 try {
-  Import-Module -Name PSToml -Force   
+  Import-Module -Name PSToml -Force -con  
 
 }
 catch {
@@ -35,7 +35,7 @@ $convertToml = get-content $TOMLcopy | ConvertFrom-Toml
 #import du module PowerCli
 
 try {
-  Import-Module -Name "VMWare.VimAutomation.Core" -Force 
+  Import-Module -Name "VMWare.VimAutomation.Core" -Force -Confirm:$false
   
 }
 catch {
