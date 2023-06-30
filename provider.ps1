@@ -35,7 +35,7 @@ $convertToml = get-content $TOMLcopy | ConvertFrom-Toml
 #import du module PowerCli
 
 try {
-  Install-Module -Name "VMWare.VimAutomation.Core" -Force -Confirm:$false
+  Install-Module -Name "VMWare.VimAutomation.Core" -Confirm:$false -Force
   
 }
 catch {
