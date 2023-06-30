@@ -9,4 +9,4 @@ Many options are not implemented, like provisionner or connection lines. I will 
 
 ## If you want to create a .toml file from scratch
 
-[Future release of REALEASE]
+[Future release of README]
